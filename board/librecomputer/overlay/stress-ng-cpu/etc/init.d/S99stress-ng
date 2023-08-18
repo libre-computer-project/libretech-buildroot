@@ -1,0 +1,33 @@
+#!/bin/sh
+
+lockfile=/run/stress-ng.pid
+start() {
+	stress-ng --cpu 0 -t 0 &
+	echo $! > $lockfile
+}
+stop() {
+	kill $(cat $lockfile)
+}
+restart() {
+        stop
+        start
+}
+
+case "$1" in
+        start)
+                start
+                ;;
+        stop)
+                stop
+                ;;
+        restart|reload)
+                restart
+                ;;
+        *)
+                echo "Usage: $0 {start|stop|restart}"
+                exit 1
+                ;;
+esac
+
+exit $?
+
