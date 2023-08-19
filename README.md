@@ -1,10 +1,12 @@
 # libretech-buildroot
 
-buildroot designed for Libre Computer boards with optimized components and design practices.
+buildroot optimized for Libre Computer boards with composible components and design practices.
 
-This branch is designed to be rebase-able on buildroot master so it is not considered a fork.
+This branch should always be rebase-able on buildroot master. It is not designed as a fork.
 
 All components are organized into composible profiles by arch, board, image layout, and overlay.
+
+Hosted standardized bootloader binaries are produced by [libretech-builder-simple](https://github.com/libre-computer-project/libretech-builder-simple).
 
 defconfigs can be considered the functional end of a composition of profiles.
 
