@@ -4,11 +4,13 @@ buildroot designed for Libre Computer boards with optimized components and desig
 
 This branch is designed to be rebase-able on buildroot master so it is not considered a fork.
 
-Also see [buildroot original README](README).
+All components are organized into composible profiles by arch, board, image layout, and overlay.
 
-## libretech customizations
+defconfigs can be considered the functional end of a composition of profiles.
 
-### configs
+Also see the [original buildroot README](README).
+
+## configs
 
 defconfigs are organized into a tree structure based on board under configs.
 
@@ -17,7 +19,12 @@ defconfigs are organized into a tree structure based on board under configs.
     * aml-s905x-cc
       * efi-btrfs_defconfig
 
-### board
+```
+make librecomputer/aml-s905x-cc/efi-btrfs_defconfig
+make
+```
+
+## board
 
 board files are organized into a tree structure based on architecture, board, image generation, composible overlays
 
@@ -42,6 +49,23 @@ board files are organized into a tree structure based on architecture, board, im
         * genimage.sh
     * overlay
       * debugfs
-      * efi-btrfs
       * stress-ng-cpu
     * project
+
+### genimage
+
+the genimage directories under board/librecomputer holds image layout profiles to support functions
+
+* initramfs - basic initramfs system in efi-vfat booted via efi
+* efi-btrfs - basic system with kernel in efi-vfat and rootfs in btrfs booted via efi
+
+### overlay
+
+the overlay directories under board/librecomputer holds overlays profiles to support functions
+
+* debugfs - adds debugfs automount to the image via init script
+* stress-ng-cpu - adds stress-ng cpu stressor to the image via init script
+
+### project
+
+the project directory is recommended for storing external submodules or repos for referencing
