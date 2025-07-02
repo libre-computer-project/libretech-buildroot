@@ -9,9 +9,12 @@ IMAGE_SIZE=$(stat -c %s $BINARIES_DIR/Image)
 IMAGE_SIZE=$((((IMAGE_SIZE + (17 << 20) - 1) >> 23 << 3) - 1))
 GENIMG_CFG=$BINARIES_DIR/genimage.cfg
 
-BOOTLOADER_get $BOARD $BINARIES_DIR/$BOARD
-
-#wget -nc https://boot.libre.computer/ci/$BOARD -O $BINARIES_DIR/$BOARD
+if [ -z "$3" ]; then
+	BOOTLOADER_get $BOARD $BINARIES_DIR/$BOARD
+else
+	echo "PWD: $PWD"
+	cp "$3" $BINARIES_DIR/$BOARD
+fi
 
 cp -f $SCRIPT_DIR/genimage.cfg "$BINARIES_DIR/"
 
